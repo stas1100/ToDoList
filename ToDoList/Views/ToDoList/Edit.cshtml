@@ -1,0 +1,36 @@
+﻿@using ToDoList.ViewModels
+@model ToDoTaskEditViewModelPage
+@{
+	Layout = "_Layout";	
+	ViewBag.Title = "Edit task - ToDoList";
+	var deadlineDate = Model.ToDoTaskViewModel.DeadlineDate;
+}
+<div class="AddTask">
+	<h3>Edit task:</h3>
+	<form action="/ToDoList/Update" method="post">
+		<div>
+			<p>Title</p>
+			<input type="text" asp-for="Title" name="Title"value="@Model.ToDoTaskViewModel.Title" size="60" required/>
+		</div>
+		<div>
+			<p>Description (optional)</p>
+			<textarea asp-for="Description" name="Description" rows="5" cols="50">@Model.ToDoTaskViewModel.Description</textarea>
+		</div>
+		<div>
+			<p>Category</p>
+			<select asp-for="CategoryId" name="CategoryId">
+			@foreach (var cat in Model.Categories)
+			{
+				<option @(cat.Id==Model.ToDoTaskViewModel.CategoryId ? "selected" : "") value="@cat.Id">@cat.Name</option>
+			}
+		</select>
+		</div>
+		@if(Model.ToDoTaskViewModel.IsDone == false){
+		<div>
+			<p>Deadline (empty - no deadline)</p>
+			<input type="datetime-local" asp-for="DeadlineDate" value="@(deadlineDate.HasValue ? Convert.ToDateTime(deadlineDate).ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss") : "")" name="DeadlineDate"/>
+		</div>
+		}
+        <button type="submit" name="Id" value="@Model.ToDoTaskViewModel.Id" >Save</button>
+	</form>
+</div>

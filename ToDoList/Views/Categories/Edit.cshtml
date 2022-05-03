@@ -1,0 +1,11 @@
+﻿@model ToDoList.ViewModels.CategoryViewModel; 
+@{
+	Layout = "_Layout";	
+	ViewBag.Title = "Edit category - ToDoList";
+}
+
+<h3>Edit category</h3>
+ <form action="/Categories/Update" method="post">
+            <input asp-for="name" name="name" value="@Model.Name" type="text" size="30" required/>
+            <button type="submit" name="Id" value="@Model.Id">Save</button>
+    </form>

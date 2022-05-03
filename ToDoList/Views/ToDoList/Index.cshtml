@@ -1,0 +1,107 @@
+﻿@using ToDoList.ViewModels
+@model ToDoTaskViewModelPage
+@{
+	Layout = "_Layout";	
+	ViewBag.Title = "Tasks - ToDoList";
+}
+<div class="AddTask">
+	<h3>Add task:</h3>
+	<form action="ToDoList/Create" method="post">
+		<div>
+			<p>Title</p>
+			<input type="text" asp-for="Title" name="Title" required />
+		</div>
+		<div>
+			<p>Description (optional)</p>
+			<textarea asp-for="Description" name="Description" rows="5" cols="50"></textarea>
+		</div>
+		<div>
+			<p>Category</p>
+			<select asp-for="CategoryId" name="CategoryId">
+			@foreach (var cat in Model.Categories)
+			{
+				<option value="@cat.Id">@cat.Name</option>
+			}
+		</select>
+		</div>
+		<div>
+			<p>Deadline (empty - no deadline)</p>
+			<input type="datetime-local" asp-for="DeadlineDate" name="DeadlineDate"/>
+		</div>
+        <input type="submit" value="create" />
+	</form>
+</div>
+<div class="topMenu">
+	@Html.ActionLink("Manage categories", "Index", "Categories")
+	<form asp-action="Index" method="get">
+	<select name="categoryId" id="categoryId">
+        <option value="0">All</option>
+        @foreach (var cat in Model.Categories)
+        {
+            <option @(cat.Id==Model.CurrentCategory ? "selected" : "") value="@cat.Id">@cat.Name</option>
+        }
+        </select>
+		<input type="submit" value="Show"/>
+	</form>
+</div>
+<div class="tasksWrapper">
+	<div class="currentTasks">
+		<h3>Current tasks</h3>
+		<div class="tasksHorizontalList">
+			@if(Model.CurrentTasks.Count > 0){
+				@foreach (var task in Model.CurrentTasks)
+				{
+					<div class="task">
+						<div class="taskHeader">
+							<h5>@task.Title</h5>
+							<span>@task.Category</span>
+							<div class="control">
+								<form action="ToDoList/Edit" method="post"><button type="submit" name="Id" value="@task.Id">Edit</button></form>
+								<form action="ToDoList/MarkAsDone" method="post"><button type="submit" name="Id" value="@task.Id">Mark as done</button></form>
+								<form action="ToDoList/Delete" method="post"><button type="submit" name="Id" value="@task.Id">X</button></form>
+							</div>
+						</div>
+						<div class="taskBody">
+							<div class="taskDescription">@task.Description</div>
+							<p>Deadline - @(task.DeadlineDate.HasValue ? task.DeadlineDate : "no deadline")</p>
+							<p>Created - @task.CreatedDate</p>
+						</div>
+					</div>
+				}
+			}else
+				{
+				<h4>Nothing here</h4>	
+				}
+		</div>
+	</div>
+	<div class="completedTasks">
+		<h3>Completed tasks</h3>
+		<div class="tasksHorizontalList">
+			@if(Model.CompletedTasks.Count > 0){
+				@foreach (var task in Model.CompletedTasks)
+				{
+					<div class="task">
+						<div class="taskHeader">
+							<h5>@task.Title</h5>
+							<span>@task.Category</span>
+							<div class="control">
+								<form action="ToDoList/Edit" method="post"><button type="submit" name="Id" value="@task.Id">Edit</button></form>
+								<form action="ToDoList/MarkAsNotDone" method="post"><button type="submit" name="Id" value="@task.Id">Mark as NOT done</button></form>
+								<form action="ToDoList/Delete" method="post"><button type="submit" name="Id" value="@task.Id">X</button></form>
+							</div>
+						</div>
+						<div class="taskBody">
+							<div class="taskDescription">@task.Description</div>
+							<p>Was completed - @task.DoneDate</p>
+							<p>Created - @task.CreatedDate</p>
+						</div>
+					</div>
+				}
+			}else
+				{
+				<h4>Nothing here</h4>	
+				}
+		</div>
+	</div>
+</div>
+

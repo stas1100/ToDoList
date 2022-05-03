@@ -1,0 +1,147 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration: none;
+}
+
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.container{
+    padding: 20px;
+}
+h3 {
+    font-family: 'Ubuntu', sans-serif;
+
+}
+h4 {
+    font-family: 'Ubuntu', sans-serif;
+    color: #069A8E;
+}
+body {
+  margin-bottom: 60px;
+}
+.container{
+    width: 100%;
+}
+
+.currentTasks, .completedTasks {
+    width: 100%;
+    padding: 20px 50px;
+}
+
+.tasksHorizontalList{
+    width: 100%;
+    display: flex;
+    overflow-x: scroll;
+    flex-wrap: nowrap;
+    padding: 20px;
+}
+.task {
+    margin: 10px 20px;
+    border: 4px solid #A1E3D8;
+    border-radius: 20px;
+    overflow: hidden;
+    font-family: 'Ubuntu', sans-serif;
+    min-width: 300px;
+    max-width: 400px;
+}
+.task .control{
+    display: flex;
+    float: right;
+}
+.task .control *{
+    margin: 0 2px;
+}
+.categoryItem {
+    margin: 10px 20px;
+    padding: 10px;
+    border: 4px solid #A1E3D8;
+    border-radius: 20px;
+    overflow: hidden;
+    font-family: 'Ubuntu', sans-serif;
+    min-width: 100px;
+    max-width: 400px;
+    display: flex;
+    justify-content:center;
+}
+.categoryItem *{
+    margin: 0 5px;
+}
+.taskHeader {
+    padding: 10px;
+    border-bottom: 2px solid #A1E3D8;
+}
+.taskHeader h5 {
+    color: #005555;
+    font-size: 20px;
+}
+.taskHeader span {
+    color: #069A8E;
+    font-size: 15px;
+}
+.taskBody{
+    padding: 10px;
+}
+.taskDescription {
+    margin: 10px 5px;
+    color: #005555;
+}
+.topMenu form{
+    margin: 20px 0 0 0;
+}
+.topMenu {
+    margin: 10px 50px;
+    font-family: 'Ubuntu', sans-serif;
+}
+.topMenu a {
+    color: #069A8E;
+    font-size: 20px;
+    padding: 10px;
+    border: 2px solid #A1E3D8;
+    border-radius: 20px;
+    margin: 0 20px 0 0;
+}
+.topMenu a:hover {
+    background-color: #1BE0D0;
+    color: #005555;
+    transition: 0.2s;
+}
+.topMenu a:active {
+    background-color: #ffffff;
+    color: #005555;
+}
+.categoryItem a{
+    color: red;
+}
+.AddTask{
+    width: 100%;
+    text-align: center;
+}
+.AddTask form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.AddTask form div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0;
+}

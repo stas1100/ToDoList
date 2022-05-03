@@ -1,0 +1,38 @@
+﻿@model ToDoList.ViewModels.CategoriesViewModelPage; 
+@{
+	Layout = "_Layout";	
+	ViewBag.Title = "Categories - ToDoList";
+}
+
+
+<div class="topMenu">
+	@Html.ActionLink("Back to tasks", "Index", "ToDOList")
+</div>
+<div class="tasksWrapper">
+	<div class="currentTasks">
+		<h3>Categories</h3>
+		<div class="tasksHorizontalList">
+			@if(Model.Categories.Count > 0){
+				@foreach (var cat in Model.Categories)
+				{
+					<div class="categoryItem">
+					@cat.Name
+					@if(@cat.Id != 1){
+						<form action="/Categories/Edit" method="post"><button type="submit" name="Id" value="@cat.Id">Edit</button></form>
+						<form action="/Categories/Delete" method="post"><button type="submit" name="Id" value="@cat.Id">X</button></form>
+					}
+					</div>
+				}
+			}else
+				{
+				<h4>Nothing here</h4>	
+				}
+		</div>
+	</div>
+	
+</div>
+<h3>Create category</h3>
+ <form action="/Categories/Create" method="post">
+            <input asp-for="name" name="name" type="text" size="30" required/>
+            <input type="submit" value="create" />
+    </form>	
